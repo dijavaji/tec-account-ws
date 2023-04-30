@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+#mysql servicios
+  mysql_db:
+    container_name: dbmysql_container
+    platform: linux/x86_64
+    image: mysql:8.0
+    restart: always
+    ports: 
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: dteccusacc_db
+      MYSQL_USER: uteccusacc
+      MYSQL_PASSWORD: uteccusacc
+      MYSQL_ROOT_PASSWORD: uteccusacc
+    volumes:
+      - mysql_db:/data/db
+
+# aplicacion api accounts-ws
+  api:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DATABASE_URI: jdbc:mysql://mysql_db:3306/dteccusacc_db?useSSL=false
+      DATABASE_HOST: mysql_db
+      DATABASE_USER: uteccusacc
+      DATABASE_PASSWORD: uteccusacc
+      DATABASE_NAME: dteccusacc_db
+      DATABASE_PORT: 3306
+    depends_on:
+      - mysql_db
+
+volumes:
+  mysql_db: {}
