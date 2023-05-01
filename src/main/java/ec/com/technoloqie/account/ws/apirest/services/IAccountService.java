@@ -1,5 +1,7 @@
 package ec.com.technoloqie.account.ws.apirest.services;
 
+import java.util.List;
+
 import ec.com.technoloqie.account.ws.apirest.models.Account;
 
 public interface IAccountService {
@@ -8,5 +10,6 @@ public interface IAccountService {
 	Account getAccountId(Integer code);
 	Account updateAccount(Account account, int id);
 	void deleteAccount(Integer code);
+	List<Account> getListAccounts();
 
 }

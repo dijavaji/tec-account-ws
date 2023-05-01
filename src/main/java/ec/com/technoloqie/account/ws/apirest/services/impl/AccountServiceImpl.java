@@ -1,6 +1,7 @@
 package ec.com.technoloqie.account.ws.apirest.services.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,11 @@ public class AccountServiceImpl implements IAccountService{
 	@Override
 	public void deleteAccount(Integer code) {
 		this.accountDao.deleteById(code);
+	}
+
+	@Override
+	public List<Account> getListAccounts() {
+		return this.accountDao.findAll();
 	}
 	
 }

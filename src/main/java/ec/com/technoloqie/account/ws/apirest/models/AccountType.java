@@ -1,19 +1,13 @@
 package ec.com.technoloqie.account.ws.apirest.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,12 +46,12 @@ public class AccountType implements Serializable{
 	private Boolean status;
 	
 	//@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ACCTYPID")
-    private List<Account> accountCol;
+	//@OneToMany(fetch = FetchType.LAZY)
+	//@JoinColumn(name = "ACCTYPID")
+    //private List<Account> accountCol;
 	
 	public AccountType() {
-		this.accountCol = new ArrayList<>();
+		//this.accountCol = new ArrayList<>();
 	}
 	    
 	public Integer getId() {
@@ -114,16 +108,6 @@ public class AccountType implements Serializable{
 
 	public void setStatus(Boolean status) {
 		this.status = status;
-	}
-
-
-	public List<Account> getAccountCol() {
-		return accountCol;
-	}
-
-
-	public void setAccountCol(List<Account> accountCol) {
-		this.accountCol = accountCol;
 	}
 
 }

@@ -53,6 +53,10 @@ public class Account implements Serializable{
 	@JoinColumn(name="ACCTYPID",nullable=false)
 	private AccountType accountType;
 	
+	@ManyToOne
+	@JoinColumn(name="CUSTOMERID",nullable=false)
+	private Customer customer;
+	
     @PrePersist 
 	public void prePersist() {
 		createdDate = new Date();
@@ -147,5 +151,15 @@ public class Account implements Serializable{
 
 	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
+	}
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 }
