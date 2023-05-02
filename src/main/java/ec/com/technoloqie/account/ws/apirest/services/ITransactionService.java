@@ -11,5 +11,6 @@ public interface ITransactionService {
 	Transaction updateTransaction(Transaction trans, int id);
 	void deleteTransaction(Integer code);
 	List<Transaction> getListTransaction();
+	Transaction payTransaction(Transaction transaction);
 	
 }

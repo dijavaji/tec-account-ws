@@ -32,22 +32,27 @@ public class TecPayTransactionWsTests {
 	@Before
 	public void setUp() throws AccountException{
 		this.transaction = new Transaction();
-		this.transaction.setAmount(100.0);
+		this.transaction.setAmount(-575.0);
+		this.transaction.setAccNumber(975446);
+		this.transaction.setAccountType(AccountConstants.TRANSACTION_TYPE_SIMPLE);
+		this.transaction.setCreatedBy("admin");
+		
 	}
 	
 	@SuppressWarnings("static-access")
 	@Test
-    public void getPayTransactionTest() {
+    public void createPayTransactionTest() {
 		this.transaction = new Transaction();
-		this.transaction.setAmount(100.0);
+		this.transaction.setAmount(-540.0);
+		this.transaction.setAccNumber(975446);
+		this.transaction.setAccountType(AccountConstants.TRANSACTION_TYPE_SIMPLE);
 		this.transaction.setCreatedBy("admin");
-		TransactionType transactionType=new TransactionType();
-		transactionType.setId(AccountConstants.TRANSACTION_TYPE_SIMPLE);
-		this.transaction.setTransactionType(transactionType);
 		try{
 			AccountLog.getLog().info("getPayTransactionTest.");
-			Transaction newTransaction = transService.createTransaction(this.transaction);
-			assertEquals( 100 ,newTransaction.getAmount(),0.0);
+			Transaction newTransaction = transService.payTransaction(this.transaction);
+			
+			
+			assertEquals( 540 ,newTransaction.getBalanceInit(),0.0);
 			//assertEquals( CurrencyConstants.GALACTIC_CURRENCY ,currency.getCurrency());
 		}catch(Exception e){
 			AccountLog.getLog().error("getPayTransactionTest.");

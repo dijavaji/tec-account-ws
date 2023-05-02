@@ -50,5 +50,10 @@ public class AccountServiceImpl implements IAccountService{
 	public List<Account> getListAccounts() {
 		return this.accountDao.findAll();
 	}
+
+	@Override
+	public Account findOneByAccNumber(Integer code) {
+		return this.accountDao.findOneByAccNumber(code);
+	}
 	
 }

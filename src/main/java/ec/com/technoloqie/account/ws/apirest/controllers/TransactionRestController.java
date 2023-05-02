@@ -62,7 +62,7 @@ public class TransactionRestController {
 		}
 		
 		try {
-			transNew = transService.createTransaction(transaction);
+			transNew = transService.payTransaction(transaction);
 		}catch(DataAccessException e) {
 			AccountLog.getLog().error("Error al momento de crear transaccion.");
 			response.put("mensaje", "Error al momento de crear transaccion");

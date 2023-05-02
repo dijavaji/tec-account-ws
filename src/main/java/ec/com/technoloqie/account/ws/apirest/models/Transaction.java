@@ -1,24 +1,20 @@
 package ec.com.technoloqie.account.ws.apirest.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -51,18 +47,18 @@ public class Transaction implements Serializable{
 	@Column(name="STATUS")
 	private Boolean status;
 	
+	@Transient
+	private Integer accNumber;  
+	
+	@Transient	
+	private Integer accountType;
+	
+	@Transient
+	private Double balanceInit;
+	
 	@ManyToOne
 	@JoinColumn(name="TRATYPID",nullable=false)
 	private TransactionType transactionType;
-	
-	//@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "TRANSACTIONID")
-    private List<AccountTransaction> accountTransactionCol;
-	
-	public Transaction() {
-		this.accountTransactionCol = new ArrayList<>();
-	}
 	
 	@PrePersist 
 	public void prePersist() {
@@ -135,4 +131,29 @@ public class Transaction implements Serializable{
 	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
 	}
+
+	public Integer getAccNumber() {
+		return accNumber;
+	}
+
+	public void setAccNumber(Integer accNumber) {
+		this.accNumber = accNumber;
+	}
+
+	public Integer getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Integer accountType) {
+		this.accountType = accountType;
+	}
+
+	public Double getBalanceInit() {
+		return balanceInit;
+	}
+
+	public void setBalanceInit(Double balanceInit) {
+		this.balanceInit = balanceInit;
+	}
+
 }

@@ -11,5 +11,6 @@ public interface IAccountService {
 	Account updateAccount(Account account, int id);
 	void deleteAccount(Integer code);
 	List<Account> getListAccounts();
+	Account findOneByAccNumber(Integer code);
 
 }
