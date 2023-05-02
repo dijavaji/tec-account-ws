@@ -1,20 +1,13 @@
 package ec.com.technoloqie.account.ws.apirest.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,16 +15,19 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="TRANSACTION")
-public class Transaction implements Serializable{
-	
+@Table(name="ACCOUNTTRANSACTION")
+public class AccountTransaction implements Serializable{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	@Column(name="TRANSACTIONID",nullable=false, unique=true)
+	@Column(name="ACCTRANID",nullable=false, unique=true)
 	private Integer id;
 	
-	@Column(name="AMOUNT",nullable=false)
-	private Double amount;
+	@Column(name="BALANCEINIT",nullable=false)
+    private Double balanceInit;
+	
+	@Column(name="BALANCEAVAILABLE",nullable=false)
+    private Double balanceAvailable;
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Column(name="CREATEDBY",nullable=false)
@@ -51,18 +47,11 @@ public class Transaction implements Serializable{
 	@Column(name="STATUS")
 	private Boolean status;
 	
-	@ManyToOne
-	@JoinColumn(name="TRATYPID",nullable=false)
-	private TransactionType transactionType;
+	@Column(name="TRANSACTIONID",nullable=false)
+	private Integer transactionId;
 	
-	//@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "TRANSACTIONID")
-    private List<AccountTransaction> accountTransactionCol;
-	
-	public Transaction() {
-		this.accountTransactionCol = new ArrayList<>();
-	}
+	@Column(name="ACCOUNTID",nullable=false)
+	private Integer accountId;
 	
 	@PrePersist 
 	public void prePersist() {
@@ -80,12 +69,20 @@ public class Transaction implements Serializable{
 		this.id = id;
 	}
 
-	public Double getAmount() {
-		return amount;
+	public Double getBalanceInit() {
+		return balanceInit;
 	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setBalanceInit(Double balanceInit) {
+		this.balanceInit = balanceInit;
+	}
+
+	public Double getBalanceAvailable() {
+		return balanceAvailable;
+	}
+
+	public void setBalanceAvailable(Double balanceAvailable) {
+		this.balanceAvailable = balanceAvailable;
 	}
 
 	public String getCreatedBy() {
@@ -128,11 +125,20 @@ public class Transaction implements Serializable{
 		this.status = status;
 	}
 
-	public TransactionType getTransactionType() {
-		return transactionType;
+	public Integer getTransactionId() {
+		return transactionId;
 	}
 
-	public void setTransactionType(TransactionType transactionType) {
-		this.transactionType = transactionType;
+	public void setTransactionId(Integer transactionId) {
+		this.transactionId = transactionId;
 	}
+
+	public Integer getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
+
 }
